@@ -1,0 +1,97 @@
+PODS:
+  - Alamofire (4.2.0)
+  - AlamofireObjectMapper (4.0.1):
+    - Alamofire (~> 4.1)
+    - ObjectMapper (~> 2.0)
+  - AsyncSwift (2.0.0)
+  - ENSwiftSideMenu (0.1.1)
+  - expanding-collection (1.0.4)
+  - FirebaseAnalytics (3.6.0):
+    - FirebaseCore (~> 3.4)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleInterchangeUtilities (~> 1.2)
+    - GoogleSymbolUtilities (~> 1.1)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseCore (3.4.5):
+    - GoogleInterchangeUtilities (~> 1.2)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseInstanceID (1.0.8)
+  - Google/Core (3.0.3):
+    - FirebaseAnalytics (~> 3.2)
+  - Google/SignIn (3.0.3):
+    - Google/Core
+    - GoogleSignIn (~> 4.0)
+  - GoogleAppUtilities (1.1.2):
+    - GoogleSymbolUtilities (~> 1.1)
+  - GoogleInterchangeUtilities (1.2.2):
+    - GoogleSymbolUtilities (~> 1.1)
+  - GoogleSignIn (4.0.1):
+    - GoogleAppUtilities (~> 1.1)
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GTMOAuth2 (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleSymbolUtilities (1.1.2)
+  - GoogleToolboxForMac/DebugUtils (2.1.0):
+    - GoogleToolboxForMac/Defines (= 2.1.0)
+  - GoogleToolboxForMac/Defines (2.1.0)
+  - GoogleToolboxForMac/NSData+zlib (2.1.0):
+    - GoogleToolboxForMac/Defines (= 2.1.0)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.0):
+    - GoogleToolboxForMac/DebugUtils (= 2.1.0)
+    - GoogleToolboxForMac/Defines (= 2.1.0)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.0)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.0)
+  - GTMOAuth2 (1.1.4):
+    - GTMSessionFetcher (~> 1.1)
+  - GTMSessionFetcher (1.1.7):
+    - GTMSessionFetcher/Full (= 1.1.7)
+  - GTMSessionFetcher/Core (1.1.7)
+  - GTMSessionFetcher/Full (1.1.7):
+    - GTMSessionFetcher/Core (= 1.1.7)
+  - Kingfisher (3.2.2)
+  - NVActivityIndicatorView (3.1)
+  - ObjectMapper (2.2.1)
+  - SCLAlertView (0.7.0)
+  - SJSegmentedScrollView (1.3.3)
+  - YouTubePlayer (0.3.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.2)
+  - AlamofireObjectMapper (~> 4.0)
+  - AsyncSwift
+  - ENSwiftSideMenu (~> 0.1.1)
+  - expanding-collection (~> 1.0.3)
+  - Google/SignIn
+  - Kingfisher (~> 3.0)
+  - NVActivityIndicatorView
+  - SCLAlertView
+  - SJSegmentedScrollView
+  - YouTubePlayer
+
+SPEC CHECKSUMS:
+  Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
+  AlamofireObjectMapper: 842d2eed43a4d0593ff0110d54ac86a170c4519c
+  AsyncSwift: 6ba6ed9ecb51344458063f7c86fe447ab824e313
+  ENSwiftSideMenu: a934caefbe811e4925f172009349da4a49901307
+  expanding-collection: be78b5822d7382d3da02b52d52273f4661567a64
+  FirebaseAnalytics: 9c67af0ebeb8d2146c9b4ea2616439affa947b58
+  FirebaseCore: 1e383fdfe37b6b5d6ff88e84204bdee30276af0f
+  FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
+  Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
+  GoogleAppUtilities: a8a552aa74f6597f805e45b5a3962766c3134973
+  GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
+  GoogleSignIn: a8694c0a8e6d1b0ec77c58014de5bfd4ba2fa766
+  GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
+  GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
+  GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
+  GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
+  Kingfisher: 821466474ad7ffc375a4aecadfa05068cfed67b3
+  NVActivityIndicatorView: 9f47e8a4affb860ef729aeec99b1550219e6c233
+  ObjectMapper: 41e43e1a89f8060ef5ea5d04ba852e269a621d68
+  SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
+  SJSegmentedScrollView: b3fa3a5e4c123d223e83b0604cc96d9dfcba01bd
+  YouTubePlayer: 88713a96c356f2c88da8925eb61438eda88bcd57
+
+PODFILE CHECKSUM: 5cb66e85173f4296e4ad9a01adbf8bcddc953bfa
+
+COCOAPODS: 1.1.1
