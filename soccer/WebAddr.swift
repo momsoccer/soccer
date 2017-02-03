@@ -9,7 +9,13 @@
 import Foundation
 
 struct WebAddr {
+    
     //let serverAddr = "http://192.168.0.82:8080/";
+    
+    //let serverAddr = "http://192.168.10.4:8080/";
+
+    //prod
     let serverAddr = "http://www.momsoft.co.kr/";
+    
     init() {}
 }

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InsCollectionViewCell" customModule="soccer" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InsCell" id="gTV-IL-0wX" customClass="InsCollectionViewCell" customModule="soccer" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="155" height="203"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="155" height="203"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_horder" translatesAutoresizingMaskIntoConstraints="NO" id="01H-WK-LP0">
+                        <rect key="frame" x="0.0" y="0.0" width="155" height="144"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="155" id="1vf-Ov-oal"/>
+                            <constraint firstAttribute="height" constant="144" id="jdL-MC-6lo"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ins Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MIL-BJ-qQq">
+                        <rect key="frame" x="8" y="174" width="139" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Y47-fs-6CE"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="tname" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WB8-mB-L3l">
+                        <rect key="frame" x="8" y="151" width="139" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="01H-WK-LP0" secondAttribute="trailing" id="1Y9-Xw-603"/>
+                <constraint firstAttribute="bottom" secondItem="01H-WK-LP0" secondAttribute="bottom" constant="59" id="Pz4-yh-6D9"/>
+                <constraint firstItem="MIL-BJ-qQq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="Tic-iD-bEb"/>
+                <constraint firstItem="01H-WK-LP0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="XlW-8M-ayg"/>
+                <constraint firstAttribute="bottom" secondItem="MIL-BJ-qQq" secondAttribute="bottom" constant="8" id="a84-JS-uJL"/>
+                <constraint firstItem="01H-WK-LP0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ixT-JO-F5J"/>
+                <constraint firstAttribute="trailing" secondItem="MIL-BJ-qQq" secondAttribute="trailing" constant="8" id="pnU-NE-F5R"/>
+            </constraints>
+            <connections>
+                <outlet property="insImage" destination="01H-WK-LP0" id="Sc0-zN-fIf"/>
+                <outlet property="insName" destination="MIL-BJ-qQq" id="kuc-OF-uS1"/>
+                <outlet property="insteamname" destination="WB8-mB-L3l" id="oea-2K-sol"/>
+            </connections>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="user_horder" width="64" height="64"/>
+    </resources>
+</document>

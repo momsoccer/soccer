@@ -1,0 +1,11 @@
+/*
+ Localizable.strings
+ soccer
+ 
+ Created by 심성보 on 2017. 1. 20..
+ Copyright © 2017년 심성보. All rights reserved.
+ "key" = "value" 형태로 저장한다
+ */
+
+"Network_Error_Message" = "It is error";
+"Server_and_Network"="The Server is connecting";

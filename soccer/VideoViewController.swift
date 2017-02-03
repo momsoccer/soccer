@@ -9,35 +9,44 @@
 import UIKit
 import YouTubePlayer
 
-class VideoViewController: UIViewController {
+class VideoViewController: UIViewController, YouTubePlayerDelegate {
 
     var videoMission:Mission?;
     @IBOutlet weak var playerView: YouTubePlayerView!
-    
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("전 화면에서 데이터를 가져왔습니다")
-        print("로그 : \(videoMission?.description)")
+        self.spinner.startAnimating()
         
+        self.playerView.delegate = self
         let videoAddr:String? = videoMission!.youtubeaddr;
         
         playerView.playerVars = [
-            "playsinline": "1" as! AnyObject,
-            "controls": "0" as! AnyObject,
-            "showinfo": "0" as! AnyObject
+            "playsinline": "1" as AnyObject,
+            "controls": "0" as AnyObject,
+            "showinfo": "0" as AnyObject
         ]
         
         playerView.loadVideoID(videoAddr!)
-        
-        
-        
     }
     
-    @IBAction func returned(val: UIStoryboardSegue){
-        print("돌아왔습니다")
+    @IBAction func videoBackreturned(val: UIStoryboardSegue){
     }
     
-    
+    @IBAction func btnBack(_ sender: Any) {
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
+    }
 
+    func playerReady(_ videoPlayer: YouTubePlayerView) {
+        self.spinner.stopAnimating()
+    }
+    
+    func playerStateChanged(_ videoPlayer: YouTubePlayerView, playerState: YouTubePlayerState) {
+    }
+    
+    func playerQualityChanged(_ videoPlayer: YouTubePlayerView, playbackQuality: YouTubePlaybackQuality) {
+    }
+    
 }

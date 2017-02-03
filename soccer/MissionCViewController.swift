@@ -29,13 +29,15 @@ class MissionCViewController: ExpandingViewController,NVActivityIndicatorViewabl
         missionNameLabel.text = nameLabel
         registerCell()
         
+        //아래 펀션으로 따로 빼서 리프레쉬 기능 적용?
+        
         let serverUrl = WebAddr();
         let getUrl = serverUrl.serverAddr+"api/mission/getMissionList"
         
         let parameters: Parameters = ["typename": self.nameLabel!,"uid":0];
         
         let size = CGSize(width: 50, height:50)
-        startAnimating(size, message: "서버와 통신 중입니다", type: NVActivityIndicatorType(rawValue: 22)!)
+        startAnimating(size, message: NSLocalizedString("Server_and_Network", comment: "서버통신"), type: NVActivityIndicatorType(rawValue: 22)!)
         
         Alamofire.request(getUrl,parameters: parameters).responseArray { (response: DataResponse<[Mission]>) in
             
@@ -59,9 +61,15 @@ class MissionCViewController: ExpandingViewController,NVActivityIndicatorViewabl
         }
     }
     
-    @IBAction func returned(segue: UIStoryboardSegue){
+    @IBAction func missionCreturned(segue: UIStoryboardSegue){
         
     }
+    
+    
+    @IBAction func backBtn(_ sender: Any) {
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 // MARK: Helpers
@@ -115,7 +123,7 @@ extension MissionCViewController {
         cell.descriptionLabel.text = self.seedMission![row].description
         cell.levelLabel.text = "레벨: \(level!)"
         
-        var imageUrl:String? = self.seedMission![row].youtubeaddr
+        let imageUrl:String? = self.seedMission![row].youtubeaddr
         let urladdr:String? = "https://img.youtube.com/vi/\(imageUrl!)/mqdefault.jpg"
     
         let url = URL(string: urladdr!)
@@ -124,6 +132,9 @@ extension MissionCViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: IndexPath) {
+        
+        
+        print("선택 \(indexPath.row)")
         
         guard let _ = collectionView.cellForItem(at: indexPath) as? MissionCollectionViewCell
             , currentIndex == (indexPath as NSIndexPath).row else { return }
@@ -135,7 +146,7 @@ extension MissionCViewController {
         let videoView = UIStoryboard(name:"Main", bundle: nil).instantiateViewController(withIdentifier: "VideoMission") as! VideoViewController;
         videoView.videoMission = missionObject;
         self.present(videoView, animated: true, completion: nil)
-        
+ 
     }
  
     
@@ -147,5 +158,27 @@ extension MissionCViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MissionCollectionViewCell.self), for: indexPath)
     }
+    
+    //빽 버튼
+    
+    
+    /*
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        print("test ========================")
+        
+        
+        if segue.identifier == "videoview"{
+            
+            //첫 번째 인자값을 이용하여 사용자가 몇 번째 행을 선택했는지 확인 한다
+            let path = self.collectionView?.indexPath(for: sender as! MissionCollectionViewCell)
+            
+            //행 정보를 통해 선택된 용화 데이터를 찾은 다음, 목적지 뷰 컨트롤러의 mvo 변수에 대입한다
+            let detailVC = segue.destination as? VideoViewController
+            detailVC?.videoMission = self.seedMission?[path!.row]
+        }
+    }
+     */
+    
 }
 

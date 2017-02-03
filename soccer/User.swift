@@ -22,6 +22,8 @@ class User: Mappable {
     var teamid:Int?
     var teamname:String?
     
+    var thumbnailImage : UIImage?
+    
     required init?(map: Map){
         
     }

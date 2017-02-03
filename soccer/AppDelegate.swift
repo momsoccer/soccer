@@ -49,6 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
         self.window?.makeKeyAndVisible()
         
+        //어플리케이션 탭바 색을 변경
+        UITabBar.appearance().barTintColor = MomClolor.hexStringToUIColor(hex: MomClolor.mom_color1)
+        UITabBar.appearance().tintColor = UIColor.white
+        
         return true
     }
     

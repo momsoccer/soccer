@@ -15,9 +15,18 @@ import ENSwiftSideMenu
 
 class ViewController: UIViewController, NVActivityIndicatorViewable, ENSideMenuDelegate{
     
+    @IBOutlet weak var dribbleImage: UIImageView!
+    @IBOutlet weak var trapping: UIImageView!
+    @IBOutlet weak var liftting: UIImageView!
+    @IBOutlet weak var arround: UIImageView!
+    @IBOutlet weak var flick: UIImageView!
+    @IBOutlet weak var crossbar: UIImageView!
+    
+    
     var missionToken:String?
     var curMission = Array<Mission>();
-
+    
+    
     @IBAction func toggleSideMenu(_ sender: Any) {
         toggleSideMenuView()
     }
@@ -32,7 +41,59 @@ class ViewController: UIViewController, NVActivityIndicatorViewable, ENSideMenuD
         self.view.backgroundColor = MomClolor.hexStringToUIColor(hex: MomClolor.mom_color1)
         
         
+        //이미지에 대한 버튼 등록
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(tapGesture1))
+        dribbleImage.addGestureRecognizer(tap1)
+        dribbleImage.isUserInteractionEnabled = true
+        
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(tapGesture2))
+        trapping.addGestureRecognizer(tap2)
+        trapping.isUserInteractionEnabled = true
+        
+        let tap3 = UITapGestureRecognizer(target: self, action: #selector(tapGesture3))
+        liftting.addGestureRecognizer(tap3)
+        liftting.isUserInteractionEnabled = true
+        
+        let tap4 = UITapGestureRecognizer(target: self, action: #selector(tapGesture4))
+        arround.addGestureRecognizer(tap4)
+        arround.isUserInteractionEnabled = true
+        
+        let tap5 = UITapGestureRecognizer(target: self, action: #selector(tapGesture5))
+        flick.addGestureRecognizer(tap5)
+        flick.isUserInteractionEnabled = true
+        
+        let tap6 = UITapGestureRecognizer(target: self, action: #selector(tapGesture6))
+        crossbar.addGestureRecognizer(tap6)
+        crossbar.isUserInteractionEnabled = true
     }
+    
+    func tapGesture1() {
+        goMissionPage(missionPage:"DRIBLE");
+    }
+    
+    func tapGesture2() {
+        goMissionPage(missionPage:"TRAPING");
+    }
+    
+    func tapGesture3() {
+        goMissionPage(missionPage:"LIFTING");
+    }
+    
+    func tapGesture4() {
+        goMissionPage(missionPage:"AROUND");
+    }
+    
+    func tapGesture5() {
+        goMissionPage(missionPage:"FLICK");
+    }
+    
+    func tapGesture6() {
+        goMissionPage(missionPage:"COMPLEX");
+    }
+    
+    
+    
+    
     
     //뷰가 그려지기 직전 2
     override func viewWillAppear(_ animated: Bool) {
@@ -63,9 +124,9 @@ class ViewController: UIViewController, NVActivityIndicatorViewable, ENSideMenuD
         //self.viewWillAppear(true)
     }
     
-
-    @IBAction func returned(val: UIStoryboardSegue){
-    //scene end
+    
+    @IBAction func mainReturned(val: UIStoryboardSegue){
+        //scene end
     }
     
     override func didReceiveMemoryWarning() {
@@ -73,40 +134,13 @@ class ViewController: UIViewController, NVActivityIndicatorViewable, ENSideMenuD
         //logout execute code
     }
     
-    
-    //Mission Button Start
-    @IBAction func dribleMissionAction(_ sender: Any) {
-        goMissionPage(missionPage:"DRIBLE");
-    }
-    
-    @IBAction func trappingMissionAction(_ sender: Any) {
-        goMissionPage(missionPage:"TRAPING");
-    }
-    
-    @IBAction func lifttingMissionPage(_ sender: Any) {
-        goMissionPage(missionPage:"LIFTING");
-    }
-    
-    @IBAction func arroundMissionPage(_ sender: Any) {
-        goMissionPage(missionPage:"AROUND");
-    }
-    
-    @IBAction func flickMissionPage(_ sender: Any) {
-        goMissionPage(missionPage:"FLICK");
-    }
-    
-    @IBAction func complexMissionPage(_ sender: Any) {
-        goMissionPage(missionPage:"COMPLEX");
-    }
-    
-    
     //Move MissionPage
     func goMissionPage(missionPage:String){
         
         let page = UIStoryboard(name:"Main", bundle: nil).instantiateViewController(withIdentifier: "missionview") as! MissionCViewController;
         page.nameLabel = missionPage;
         self.present(page, animated: true, completion: nil)
-
+        
     }
     
 }

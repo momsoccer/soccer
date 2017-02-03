@@ -7,89 +7,161 @@
 //
 
 import UIKit
+import Alamofire
+import NVActivityIndicatorView
+import AlamofireObjectMapper
+import ObjectMapper
+import Kingfisher
 
-class RankingTableViewController: UITableViewController {
-
+class RankingTableViewController: UITableViewController,NVActivityIndicatorViewable {
+    
+    var page:Int = 1;
+    var inputOffset:Int = 0;
+    let limitNumber:Int = 40;
+    
+    let serverUrl = WebAddr();
+    
+    lazy var  userMissionList : [UserMainVo] = {
+        var datalist = [UserMainVo]()
+        return datalist
+    }()
+    
+    var typename = [String]();
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        
+        refreshControl?.attributedTitle = NSAttributedString(string: "데이터 갱신")
+        refreshControl?.tintColor = UIColor.red
+        
+        refreshControl?.addTarget(self,
+                                  action: #selector(RankingTableViewController.handleRefresh(refreshControl:)),
+                                  for: UIControlEvents.valueChanged)
+        
+        //데이터 가져오기
+        callUserMissionVideoAPI()
     }
 
+    
+    func handleRefresh(refreshControl: UIRefreshControl) {
+        //1초의 딜레이를 준다..
+        self.perform(#selector(self.endRefresh), with: nil, afterDelay: 1.0)
+    }
+    
+    func endRefresh() {
+        print("새로고침을 합니다")
+        callUserMissionVideoAPI()
+        refreshControl?.endRefreshing()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return self.userMissionList.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "RankingCell", for: indexPath) as! RankingTableViewCell
+        
+        let row = self.userMissionList[indexPath.row]
+        
+        print("유저 이름은 : \(row.username)")
+        
+        
+        cell.name.text = row.username
+        
+        //유저이미지
+        DispatchQueue.main.async(execute: {
+            
+            if  row.profileimgurl != nil {
+                let imageUrl:String? = row.profileimgurl
+                
+                if((imageUrl?.characters.count)! > 7){
+                    
+                    let url = URL(string: imageUrl!)
+                    cell.userImage.kf.setImage(with: url!,
+                                               placeholder: UIImage(named: "user_horder.png"))
+                }
+            }
+        })
+        
+        //비디오 이미지
+        DispatchQueue.main.async(execute: {
+            
+            if  row.profileimgurl != nil {
+                let videoImagUrl:String? = row.uservideo
+                let urladdr:String? = "https://img.youtube.com/vi/\(videoImagUrl!)/mqdefault.jpg"
+                
+                if((videoImagUrl?.characters.count)! > 7){
+                    
+                    let url = URL(string: urladdr!)
+                    cell.missionVideoImage.kf.setImage(with: url!,
+                                               placeholder: UIImage(named: "video_holder.png"))
+                }
+            }
+        })
+ 
         return cell
     }
-    */
+    
+    func callUserMissionVideoAPI(offsetNumber:Int = 0){
+        
+        //스피너 정의
+        let size = CGSize(width: 50, height:50)
+        self.startAnimating(size, message: NSLocalizedString("Server_and_Network", comment: "정보를 가져옵니다"), type: NVActivityIndicatorType(rawValue: 22)!)
+        
+        let apiUrl = serverUrl.serverAddr + "/api/usermain/getUserMainList"
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+        self.typename = ["DRIBLE","TRAPING","LIFTING","AROUND","COMPLEX","FLICK"];
+        
+            let parameters: Parameters = [
+                //"missiontype": nil as! Any,
+                //"missionname": nil as! Any,
+                "offset": offsetNumber,
+                "limit": self.limitNumber,
+                //미션주제별 조건 Array
+                "typename" : self.typename,
+                "listCount" : self.typename.count
+            ]
+            
+            //유저 조회 일때
+            Alamofire.request(apiUrl,
+                              method: .post,
+                              parameters: parameters,
+                              encoding: JSONEncoding.default
+                ).responseArray { (response: DataResponse<[UserMainVo]>) in
+                    
+                    if response.result.error == nil {
+                        
+                        let list = response.result.value;
+                        
+                        print("가져온 카운터는 !! : \(list?.count)")
+                        
+                        if offsetNumber == 0 {
+                            self.userMissionList = list!
+                            self.stopAnimating()
+                            self.tableView.reloadData()
+                        }else{
+                            self.userMissionList.append(contentsOf: list!)
+                            self.stopAnimating()
+                            self.tableView.reloadData()
+                        }
+                        
+                    }else{
+                        print("통신에 문제가 있습니다")
+                        self.stopAnimating()
+                    }
+            }
     }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
